@@ -1,0 +1,11 @@
+<% layout('layout/boilerplate') %>
+    <div>
+        <a href="/new">Add New</a>
+
+    </div>
+    <% for(let i of movies){%>
+        <a href="/movies/<%=i._id%>">
+            <img style="width: 15%; margin: calc(10%/17);" class="card-img-top" src="<%=i.ImageUrl%>"
+                alt="<%= i.title%>">
+        </a>
+        <%}%>
