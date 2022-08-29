@@ -41,7 +41,10 @@ app.get('/new', (req, res) => {
 
 app.get('/movies', async (req, res) => {
     const movies = await Movie.find({});
-    res.render('movies/index', { movies })
+    // res.render('movies/index', { movies })
+    console.log(":: :: " + typeof (movies))
+    console.log(movies)
+    res.json(movies)
 })
 
 
@@ -54,37 +57,15 @@ app.get('/movies/:id', async (req, res) => {
     res.render('movies/show', { movie })
 })
 
-app.get('/series', (req, res) => {
 
-    res.send("this is for series homepage")
-})
 
-app.get('/code', (req, res) => {
-    res.render('movies/code')
-})
 
 app.get('/movies/:id/edit', async (req, res) => {
     const movie = await Movie.findById(req.params.id);
     res.render('movies/edit', { movie })
 })
 
-app.get('/code', (req, res) => {
-    res.render('movies/code')
-})
 
-app.get('/all', (req, res) => {
-    res.render('movies/all')
-})
-app.post('/code', async (req, res) => {
-    let code = req.body['test']['code'];
-    let language = req.body['test']['language'];
-    let title = req.body['test']['title'];
-
-    const finalcode = `<pre><code>${code}</code></pre>`
-    const ftest = new Code({ title, language, finalcode })
-    await ftest.save();
-    res.send(ftest)
-})
 app.post('/movies', async (req, ress) => {
     const id = req.body['movie']['title'];
     const res = req.body['movie']['res'];
@@ -129,6 +110,6 @@ app.delete('/movies/:id', async (req, res) => {
     res.redirect('/movies')
 })
 
-app.listen(3000, (req, res) => {
-    console.log("listening to port 3000")
+app.listen(5000, (req, res) => {
+    console.log("listening to port 5000")
 })
