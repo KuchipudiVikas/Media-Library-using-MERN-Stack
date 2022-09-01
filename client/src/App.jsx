@@ -1,34 +1,22 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import { Routes, Route, Outlet } from "react-router-dom";
 import './app.css'
-
+import Show from "./routes/show";
+import Home from "./routes/home";
+import NavBar from "./components/navigation/navbar.component";
+import New from "./routes/new";
 const App = () => {
-  const [movies, setMovies] = useState([{}]);
-
-
-  useEffect(() => {
-    fetch('/movies').then(
-      response => response.json()
-    ).then(data => {
-      setMovies(data)
-      console.log(data)
-
-    })
-  }, []);
-
 
   return (
     <div className="App">
-      <h1>this is homepage </h1>
-      {
-        movies.map((movie) => {
-          return (
-            <a href={`/movies/${movie._id}`}>
-              <img className="cover" src={movie.ImageUrl} alt={movie.title} />
-            </a>
-          )
-        })
-      }
+      <Routes>
+        <Route path="/" element={< NavBar />} >
+          <Route index element={<Home />} />
+          <Route path='/new' element={<New />} />
+          <Route path="movies/:id" element={<Show />}>
+
+          </Route>
+        </Route>
+      </Routes>
     </div>
   );
 }

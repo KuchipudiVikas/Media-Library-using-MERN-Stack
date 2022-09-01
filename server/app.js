@@ -41,10 +41,8 @@ app.get('/new', (req, res) => {
 
 app.get('/movies', async (req, res) => {
     const movies = await Movie.find({});
-    // res.render('movies/index', { movies })
-    console.log(":: :: " + typeof (movies))
-    console.log(movies)
     res.json(movies)
+
 })
 
 
