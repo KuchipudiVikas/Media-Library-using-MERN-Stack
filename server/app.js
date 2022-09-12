@@ -65,9 +65,9 @@ app.get('/movies/:id/edit', async (req, res) => {
 
 
 app.post('/movies', async (req, ress) => {
-    const id = req.body['movie']['title'];
-    const res = req.body['movie']['res'];
-    const link = req.body['movie']['link'];
+    const id = req.body.title;
+    const res = req.body.res;
+    const link = req.body.link;
     const url = `https://mdblist.p.rapidapi.com/?i=${id}`;
     let movie = {}
 
@@ -92,8 +92,7 @@ app.post('/movies', async (req, ress) => {
     const description = movie['description'];
     const d = new Movie({ title, res, year, ImageUrl, link, rating, description })
     await d.save();
-    console.log(d)
-    ress.redirect('/movies')
+    ress.send(d)
 })
 
 app.put('/movies/:id', async (req, res) => {

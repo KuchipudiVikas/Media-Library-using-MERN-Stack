@@ -3,6 +3,12 @@ import navCategories from "./navcategories"
 
 import { Fragment } from 'react';
 
+const Footer = () => {
+    return (
+        <h1>this is footer partial</h1>
+    )
+}
+
 const NavBar = () => {
     return (
         <Fragment>
@@ -17,6 +23,8 @@ const NavBar = () => {
                     })
                 }
                 <Outlet />
+
+
             </div>
         </Fragment>
     )
