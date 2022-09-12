@@ -1,3 +1,4 @@
+import Edit from "./routes/edit.componenet";
 import { Routes, Route, Outlet } from "react-router-dom";
 import './app.css'
 import Show from "./routes/show";
@@ -12,12 +13,12 @@ const App = () => {
         <Route path="/" element={< NavBar />} >
           <Route index element={<Home />} />
           <Route path='/new' element={<New />} />
-          <Route path="movies/:id" element={<Show />}>
+          <Route path="movies/:id/" element={<Show />} />
+          <Route path="movies/:id/edit" element={<Edit />} />
 
-          </Route>
         </Route>
       </Routes>
-    </div>
+    </div >
   );
 }
 

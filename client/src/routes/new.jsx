@@ -8,7 +8,8 @@ const New = () => {
     const HandleSubmit = () => {
         axios.post('/movies', movieinfo).then(
             response => {
-                navigate(`/`)
+                console.log(response.data.title)
+                navigate(`/movies/${response.data.title}`, { state: response.data })
 
             }
         )

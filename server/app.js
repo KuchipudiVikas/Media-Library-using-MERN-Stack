@@ -97,14 +97,14 @@ app.post('/movies', async (req, ress) => {
 
 app.put('/movies/:id', async (req, res) => {
     const { id } = req.params;
-    const movie = await Movie.findByIdAndUpdate(id, { ...req.body.movie });
-    res.redirect(`/movies/${movie._id}`)
+    const movie = await Movie.findByIdAndUpdate(id, { ...req.body });
+    const updated = await Movie.findById(req.params.id);
+    res.send(updated)
 })
 
 app.delete('/movies/:id', async (req, res) => {
     const { id } = req.params;
     await Movie.findByIdAndDelete(id);
-    res.redirect('/movies')
 })
 
 app.listen(5000, (req, res) => {

@@ -1,10 +1,18 @@
-
-import { useLocation } from 'react-router-dom'
+import axios from 'axios'
+import { useLocation, useNavigate, Link } from 'react-router-dom'
 import './show.css'
 const Show = () => {
+    const navigate = useNavigate()
     const location = useLocation();
     const movie = location.state;
     const { title, description, link, rating, res, year, ImageUrl } = movie;
+    const deleteMovie = () => {
+        axios.delete(`/movies/${movie._id}`).then(
+            navigate('/')
+        )
+
+    }
+
     return (
 
         <div className="card">
@@ -17,7 +25,7 @@ const Show = () => {
                     <ul>
                         <li>{year}</li>
                         <li>{rating}</li>
-                        <li>Action</li>
+                        <li>{res}</li>
                     </ul>
                     <div className="card_right__rating">
                         <div className="card_right__rating__stars">
@@ -72,24 +80,16 @@ const Show = () => {
                     <div className="card_right__button">
                         <a href={link} target="_blank">WATCH MOVIE</a>
                     </div>
+                    <div className="card_right__button">
+                        <Link to={`/movies/${movie.title}/edit`} state={movie}>Edit</Link>
+                    </div>
+                    <div className="card_right__button">
+                        <button onClick={deleteMovie}>Delete</button>
+                    </div>
                 </div>
             </div>
         </div>
 
-
-        // <div className="">
-
-        //     <div>
-
-        //         <div className="poster">
-        //             <img src={movie.ImageUrl} />
-        //         </div>
-        //         <div className="movie-body">
-        //             <h2>{movie.title}</h2>
-        //         </div>
-        //         <button><a href={link}>watch</a></button>
-        //     </div>
-        // </div>
     )
 }
 
