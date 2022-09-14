@@ -13,9 +13,12 @@ const Home = () => {
     }, []);
 
     return (
+
+
         <div className="App">
             <Movielist movies={movies} />
         </div>
+
     );
 }
 export default Home;

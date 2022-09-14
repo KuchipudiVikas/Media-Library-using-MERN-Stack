@@ -1,12 +1,11 @@
+const express = require('express');
+const app = express();
+const mongoose = require('mongoose')
 const fetch = require("node-fetch");
 const bodyParser = require('body-parser');
-const express = require('express');
 const Movie = require('./models/movies');
-const mongoose = require('mongoose')
-const ejsMate = require('ejs-mate')
-const methodOverride = require('method-override');
-const Code = require('./models/code')
 
+//mongo connection
 mongoose.connect('mongodb://localhost:27017/mystore', {
     useNewUrlParser: true,
 });
@@ -16,19 +15,13 @@ db.once("open", () => {
     console.log("database connected!!")
 })
 
-const app = express();
-app.engine('ejs', ejsMate)
-const path = require('path');
-const movie = require('./models/movies');
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, './views'))
+//url parsing
 app.use(express.urlencoded({ extended: true }))
-app.use(methodOverride('_method'));
 app.use(express.json())
-app.use(bodyParser.json()) // for parsing application/json
+app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-
+//restful routes
 app.get('/', async (req, res) => {
     const movies = await Movie.find({});
     res.render('movies/index', { movies })
@@ -45,18 +38,10 @@ app.get('/movies', async (req, res) => {
 
 })
 
-
-
-
-
-
 app.get('/movies/:id', async (req, res) => {
     const movie = await Movie.findById(req.params.id);
     res.render('movies/show', { movie })
 })
-
-
-
 
 app.get('/movies/:id/edit', async (req, res) => {
     const movie = await Movie.findById(req.params.id);

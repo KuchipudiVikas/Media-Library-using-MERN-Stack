@@ -13,7 +13,7 @@ const Edit = () => {
         axios.put(`/movies/${movie._id}`, movieinfo).then(
             response => {
                 console.log(response.data)
-                navigate(`/movies/${response.data.title}`, { state: response.data })
+                navigate(`/movies/${response.data.title}`, { state: movieinfo })
 
             }
         )
