@@ -1,6 +1,8 @@
 import { useState } from "react";
 import axios from 'axios';
 import { Navigate, useNavigate } from 'react-router-dom'
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 const New = () => {
     const navigate = useNavigate();
@@ -25,13 +27,49 @@ const New = () => {
 
 
     return (
-        <div>
-            <div><input name="title" type="text" placeholder="IMDB ID" onChange={handleChange} /></div>
-            <div><input name="res" type="text" placeholder="Resolution" onChange={handleChange} /></div>
-            <div><input name="link" type="text" placeholder="Link" onChange={handleChange} /></div>
-            <div className=""><button onClick={HandleSubmit}>Add</button></div>
+
+        <div className="">
+            <div className="row">
+                <h1 className="text-center">
+                    New Movie
+                </h1>
+                <div className="col-6 offset-3">
+
+
+                    <div className="mb-3">
+                        <label className="form-label" for="title">IMDB ID</label>
+                        <input className="form-control" type="text" id="title" name="title" onChange={handleChange} required />
+                        <div className="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+                    <div className="mb-3">
+                        <label className="form-label" for="location">Resolution</label>
+                        <input className="form-control" type="text" id="location" name="res" onChange={handleChange} required />
+                        <div className="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+                    <div className="mb-3">
+                        <label className="form-label" for="image">Link</label>
+                        <input className="form-control" type="text" id="image" name="link" onChange={handleChange} required />
+                        <div className="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+
+
+                    <div className="mb-3">
+                        <button className="btn btn-success" onClick={HandleSubmit}>Add</button>
+                    </div>
+
+                </div>
+            </div>
 
         </div>
+
+
+
     )
 }
 

@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { useLocation, useNavigate, Link } from 'react-router-dom'
-import './show.css'
+import './show.scss'
 const Show = () => {
     const navigate = useNavigate()
     const location = useLocation();
@@ -15,21 +15,21 @@ const Show = () => {
 
     return (
 
-        <div className="card">
-            <div className="card_left">
+        <div className="tcard">
+            <div className="tcard_left">
                 <img src={ImageUrl} />
             </div>
-            <div className="card_right">
+            <div className="tcard_right">
                 <h1>{title}</h1>
-                <div className="card_right__details">
+                <div className="tcard_right__details">
                     <ul>
                         <li>{year}</li>
-                        <li>{rating}</li>
                         <li>{res}</li>
+                        <li>{rating}</li>
                     </ul>
-                    <div className="card_right__rating">
-                        <div className="card_right__rating__stars">
-                            <fieldset className="rating">
+                    <div className="tcard_right__rating">
+                        <div className="tcard_right__rating__stars">
+                            {/* <fieldset className="rating">
                                 <input id="star10" name="rating" type="radio" value="10" />
                                 <label className="full" htmlFor="star10" title="10 stars"></label>
                                 <input id="star9half" name="rating" type="radio" value="9 and a half" />
@@ -70,25 +70,26 @@ const Show = () => {
                                 <label className="full" htmlFor="star1" title="1 star"></label>
                                 <input id="starhalf" name="rating" type="radio" value="half" />
                                 <label className="half" htmlFor="starhalf" title="0.5 stars"></label>
-                            </fieldset>
+                            </fieldset> */}
                         </div>
                     </div>
-                    <div className="card_right__review">
+                    <div className="tcard_right__review">
                         <p>{description}</p>
                         <a href="http://www.imdb.com/title/tt0266697/plotsummary?ref_=tt_stry_pl" target="_blank">Read more</a>
                     </div>
-                    <div className="card_right__button">
-                        <a href={link} target="_blank">WATCH MOVIE</a>
+                    <div className="tcard_right__button">
+                        <a href={link} target="_blank">WATCH</a>
                     </div>
-                    <div className="card_right__button">
-                        <Link to={`/movies/${movie.title}/edit`} state={movie}>Edit</Link>
+                    <div className="tcard_right__button">
+                        <Link to={`/movies/${movie._id}/edit`} state={movie}>Edit</Link>
                     </div>
-                    <div className="card_right__button">
-                        <button onClick={deleteMovie}>Delete</button>
+                    <div className="tcard_right__button" onClick={deleteMovie}>
+                        <Link >Delete</Link>
                     </div>
                 </div>
             </div>
         </div>
+
 
     )
 }

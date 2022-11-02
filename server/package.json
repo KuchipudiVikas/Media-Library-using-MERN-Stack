@@ -16,7 +16,7 @@
     "express": "^4.18.1",
     "method-override": "^3.0.0",
     "mongo": "^0.1.0",
-    "mongoose": "^6.5.1",
+    "mongoose": "^6.6.0",
     "node": "^16.17.0",
     "node-fetch": "^2.6.7",
     "parser": "^0.1.4",
