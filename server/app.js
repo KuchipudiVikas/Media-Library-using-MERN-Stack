@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 const fetch = require("node-fetch");
 const bodyParser = require('body-parser');
 const Movie = require('./models/movies');
+const movies = require('./models/movies');
 
 //mongo connection
 mongoose.connect('mongodb://localhost:27017/mystore', {
@@ -19,6 +20,7 @@ db.once("open", () => {
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(bodyParser.json())
+app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }))
 
 //restful routes
@@ -27,10 +29,7 @@ app.get('/', async (req, res) => {
     res.render('movies/index', { movies })
 })
 
-app.get('/new', (req, res) => {
 
-    res.render('movies/new')
-})
 
 app.get('/movies', async (req, res) => {
     const movies = await Movie.find({});
@@ -38,10 +37,10 @@ app.get('/movies', async (req, res) => {
 
 })
 
-app.get('/movies/:id', async (req, res) => {
-    const movie = await Movie.findById(req.params.id);
-    res.render('movies/show', { movie })
-})
+// app.get('/movies/:id', async (req, res) => {
+//     const movie = await Movie.findById(req.params.id);
+//     res.render('movies/show', { movie })
+// })
 
 app.get('/movies/:id/edit', async (req, res) => {
     const movie = await Movie.findById(req.params.id);
@@ -69,14 +68,27 @@ app.post('/movies', async (req, ress) => {
         .then(json => {
             movie = json
         })
-        .catch(err => console.error('error:' + err));
+        .catch(err => console.error('error:' + err))
+
     const title = movie['title'];
     const year = movie['year'];
     const ImageUrl = movie['poster']
+    const BackDrop = movie['backdrop']
     const rating = movie['ratings'][0]['value'];
     const description = movie['description'];
-    const d = new Movie({ title, res, year, ImageUrl, link, rating, description })
+    console.log(movie)
+    let keyWords = title + year + res
+    if (movie.keywords) {
+        if (movie.keywords.length > 25) {
+            movie.keywords = movie.keywords.slice(0, 25)
+        }
+        movie.keywords.forEach(key => {
+            keyWords = keyWords + key.name
+        });
+    }
+    const d = new Movie({ id, title, res, year, ImageUrl, BackDrop, link, rating, description, keyWords })
     await d.save();
+    console.log(d)
     ress.send(d)
 })
 
@@ -91,6 +103,7 @@ app.delete('/movies/:id', async (req, res) => {
     const { id } = req.params;
     await Movie.findByIdAndDelete(id);
 })
+
 
 app.listen(5000, (req, res) => {
     console.log("listening to port 5000")

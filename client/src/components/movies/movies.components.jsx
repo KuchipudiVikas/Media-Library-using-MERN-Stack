@@ -12,7 +12,7 @@ const Movielist = ({ movies }) => {
                     )
                 })
             }
-        </div>
+        </div >
     )
 }
 
