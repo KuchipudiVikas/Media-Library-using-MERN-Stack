@@ -1,13 +1,12 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react'
 import axios from 'axios'
-
+import { Form } from 'react-bootstrap'
 
 const Edit = () => {
     const location = useLocation();
     const movie = location.state;
     const navigate = useNavigate()
-    const { title, res, year, link } = movie;
     const [movieinfo, setMovieinfo] = useState(movie);
     const HandleSubmit = () => {
         axios.put(`/movies/${movie._id}`, movieinfo).then(
@@ -44,9 +43,19 @@ const Edit = () => {
                             Looks good!
                         </div>
                     </div>
+                    <>
+                        <Form.Select aria-label="Default select example" name='res' >
+                            <option index>Resolution</option>
+                            <option value="4K IMAX">4K IMAX</option>
+                            <option value="1080p IMAX">1080p IMAX</option>
+                            <option value="4K">4K</option>
+                            <option value="1080p">1080p</option>
+                            <option value="720p">720</option>
+                        </Form.Select>
+                    </>
                     <div className="mb-3">
-                        <label className="form-label" htmlFor="location">Resolution</label>
-                        <input className="form-control" type="text" id="location" name="res" onChange={handleChange} value={movieinfo.res} required />
+                        <label className="form-label" for="image">Size</label>
+                        <input className="form-control" type="text" id="image" name="link" required />
                         <div className="valid-feedback">
                             Looks good!
                         </div>

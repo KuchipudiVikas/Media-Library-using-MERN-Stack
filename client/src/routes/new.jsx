@@ -1,21 +1,22 @@
-import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
+import { Form, Button } from 'react-bootstrap'
 
 const New = () => {
     const navigate = useNavigate();
-
+    const [isLoading, setLoading] = useState(false);
     const titleRef = useRef();
     const resRef = useRef();
     const linkRef = useRef();
     const sizeRef = useRef();
     const HandleSubmit = () => {
-        const title = titleRef.current.value
+        const id = titleRef.current.value
         const res = resRef.current.value
         const size = sizeRef.current.value
         const link = linkRef.current.value
-        axios.post('/movies', { title, res, size, link }).then(
+        setLoading(true)
+        axios.post('/movies', { id, res, size, link }).then(
             response => {
                 navigate(`/movies/${response.data.title}`, { state: response.data })
             }
@@ -70,9 +71,14 @@ const New = () => {
                     </div>
 
 
-                    <div className="mb-3">
-                        <button className="btn btn-success" onClick={HandleSubmit}>Add</button>
-                    </div>
+                    <Button
+                        variant="success"
+                        disabled={isLoading}
+                        onClick={HandleSubmit}
+                    >
+                        {isLoading ? 'Adding…' : 'Add'}
+                    </Button>
+
 
                 </div>
             </div>
@@ -84,4 +90,4 @@ const New = () => {
     )
 }
 
-export default New;
+export default New; 
