@@ -15,3 +15,9 @@ module.exports.options = {
         'X-RapidAPI-Host': 'mdblist.p.rapidapi.com'
     }
 };
+
+// module.exports.combine = (keywords) => {
+//     // let keywords = ''
+//     keywords.map(key => keywords = key.name + '')
+//     return keywords
+// }

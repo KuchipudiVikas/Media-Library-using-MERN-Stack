@@ -1,6 +1,7 @@
 if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config()
 }
+
 const path = require('path')
 const express = require('express');
 const app = express();
@@ -9,16 +10,13 @@ const fetch = require("node-fetch");
 const bodyParser = require('body-parser');
 const Movie = require('./models/movies');
 const Account = require('./models/accounts');
-const { toRuntime, options } = require('./helpers/functions')
+const { toRuntime, options, } = require('./helpers/functions')
 const port = process.env.PORT || 5000
 const cors = require('cors')
 
 
 const dbUrlLocal = 'mongodb://127.0.0.1:27017/mystore'
 const dbUrlAtlas = process.env.DB_URL
-// mongoose.connect(dbUrlAtlas, {
-//     useNewUrlParser: true,
-// });
 
 const connectDB = async () => {
     try {
@@ -30,11 +28,6 @@ const connectDB = async () => {
 }
 
 
-// const db = mongoose.connection;
-// db.on("error", console.error.bind(console, "connection error:"));
-// db.once("open", () => {
-//     console.log("database connected!!")
-// })
 
 app.use(cors({ origin: "http:localhost:3000" }))
 app.use(express.urlencoded({ extended: true }))
@@ -66,10 +59,12 @@ app.post('/movies', async (req, ress) => {
         })
         .catch(err => console.error('error:' + err));
 
-    let { title, year, description, backdrop, trailer, runtime } = movie;
+    let { title, year, description, backdrop, trailer, runtime, } = movie;
     const ImageUrl = movie['poster']
     const rating = movie['ratings'][0]['value']
+
     runtime = toRuntime(runtime)
+
     const d = new Movie({ title, res, size, year, ImageUrl, backdrop, link, trailer, rating, runtime, description, })
     await d.save();
     ress.send(d)
@@ -130,7 +125,7 @@ app.get("*", function (_, res) {
 });
 
 
-//Connect to the database before listening
+
 connectDB().then(() => {
     app.listen(port, () => {
         console.log("listening for requests");
