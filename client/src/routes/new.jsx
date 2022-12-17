@@ -9,11 +9,13 @@ const New = () => {
     const titleRef = useRef();
     const resRef = useRef();
     const linkRef = useRef();
+    const sizeRef = useRef();
     const HandleSubmit = () => {
         const title = titleRef.current.value
         const res = resRef.current.value
+        const size = sizeRef.current.value
         const link = linkRef.current.value
-        axios.post('/movies', { title, res, link }).then(
+        axios.post('/movies', { title, res, size, link }).then(
             response => {
                 navigate(`/movies/${response.data.title}`, { state: response.data })
             }
@@ -52,6 +54,13 @@ const New = () => {
 
 
 
+                    <div className="mb-3">
+                        <label className="form-label" for="image">size</label>
+                        <input className="form-control" type="text" id="image" name="link" ref={sizeRef} required />
+                        <div className="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
                     <div className="mb-3">
                         <label className="form-label" for="image">Link</label>
                         <input className="form-control" type="text" id="image" name="link" ref={linkRef} required />
