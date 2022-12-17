@@ -16,9 +16,9 @@ const cors = require('cors')
 
 const dbUrlLocal = 'mongodb://127.0.0.1:27017/mystore'
 const dbUrlAtlas = process.env.DB_URL
-mongoose.connect(dbUrlAtlas, {
-    useNewUrlParser: true,
-});
+// mongoose.connect(dbUrlAtlas, {
+//     useNewUrlParser: true,
+// });
 
 const connectDB = async () => {
     try {
@@ -30,11 +30,11 @@ const connectDB = async () => {
 }
 
 
-const db = mongoose.connection;
-db.on("error", console.error.bind(console, "connection error:"));
-db.once("open", () => {
-    console.log("database connected!!")
-})
+// const db = mongoose.connection;
+// db.on("error", console.error.bind(console, "connection error:"));
+// db.once("open", () => {
+//     console.log("database connected!!")
+// })
 
 app.use(cors({ origin: "http:localhost:3000" }))
 app.use(express.urlencoded({ extended: true }))
