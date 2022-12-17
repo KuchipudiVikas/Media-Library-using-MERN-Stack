@@ -10,7 +10,7 @@ const bodyParser = require('body-parser');
 const Movie = require('./models/movies');
 const Account = require('./models/accounts');
 const { toRuntime, options } = require('./helpers/functions')
-const port = process.env.PORT | 5000
+const port = process.env.PORT || 5000
 const cors = require('cors')
 
 
@@ -19,6 +19,17 @@ const dbUrlAtlas = process.env.DB_URL
 mongoose.connect(dbUrlAtlas, {
     useNewUrlParser: true,
 });
+
+const connectDB = async () => {
+    try {
+        const conn = await mongoose.connect(dbUrlAtlas);
+    } catch (error) {
+        console.log(error);
+        process.exit(1);
+    }
+}
+
+
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", () => {
@@ -119,6 +130,9 @@ app.get("*", function (_, res) {
 });
 
 
-app.listen(port, (req, res) => {
-    console.log("listening to port " + port)
+//Connect to the database before listening
+connectDB().then(() => {
+    app.listen(port, () => {
+        console.log("listening for requests");
+    })
 })
