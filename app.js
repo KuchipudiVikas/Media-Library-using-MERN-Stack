@@ -91,7 +91,6 @@ app.post('/movies', async (req, ress) => {
 
 app.post('/series', async (req, ress) => {
     const { id, res, seasons } = req.body;
-    console.log(req.body)
     const url = `https://mdblist.p.rapidapi.com/?i=${id}`;
     let series = {}
     await fetch(url, options)
@@ -129,7 +128,6 @@ app.post('/admin/accounts', async (req, res) => {
 
 app.put('/admin/accounts/:id', async (req, res) => {
     const { id } = req.params;
-    console.log(req.body)
     const acc = await Account.findByIdAndUpdate(id, { ...req.body })
     const updated = await Account.findByIdAndUpdate(req.params.id)
     res.send(updated)
