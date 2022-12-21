@@ -7,6 +7,21 @@
 }
 
 .buttons {
+    padding-top: 20px;
     display: flex;
     align-items: center;
+    justify-content: space-around;
+}
+
+.seasonform {
+    width: 150px;
+}
+
+.show {
+    color: #ffda00;
+    cursor: pointer;
+}
+
+.show:hover {
+    color: white;
 }

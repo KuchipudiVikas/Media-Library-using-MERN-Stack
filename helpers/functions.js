@@ -16,8 +16,3 @@ module.exports.options = {
     }
 };
 
-// module.exports.combine = (keywords) => {
-//     // let keywords = ''
-//     keywords.map(key => keywords = key.name + '')
-//     return keywords
-// }

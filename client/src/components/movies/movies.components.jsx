@@ -7,7 +7,7 @@ const Movielist = ({ movies }) => {
                 movies.map((movie) => {
                     return (
                         <Link to={`/movies/${movie.title}`} state={movie}>
-                            <img className="cover" src={movie.ImageUrl} alt={movie.title} />
+                            <img className="cover" src={movie.poster} alt={movie.title} />
                         </Link>
                     )
                 })

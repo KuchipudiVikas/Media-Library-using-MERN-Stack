@@ -7,7 +7,7 @@ const moviesSchema = new Schema({
     res: String,
     size: String,
     year: Number,
-    ImageUrl: String,
+    poster: String,
     backdrop: String,
     link: String,
     trailer: String,

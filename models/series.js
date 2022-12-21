@@ -3,12 +3,19 @@ const Schema = mongoose.Schema;
 
 const seriesSchema = new Schema({
     title: String,
-    noe: String,
-    year: Number,
+    year: String,
+    description: String,
+    runtime: String,
+    rating: String,
+    trailer: String,
     poster: String,
-    link: String,
-    episodes: String,
-    description: String
-});
+    backdrop: String,
+    seasons: [
+        {
+            name: String,
+            link: String
+        }
+    ],
+})
 
-module.exports = mongoose.model('series', seriesSchema);
+module.exports = mongoose.model('series', seriesSchema)

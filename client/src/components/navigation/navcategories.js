@@ -8,6 +8,10 @@ const navCategories = [
         link: '/movies'
     },
     {
+        name: "Series",
+        link: '/series'
+    },
+    {
         name: "New",
         link: '/new'
     },
