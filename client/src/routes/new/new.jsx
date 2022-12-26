@@ -36,10 +36,12 @@ const New = () => {
     }
 
     const getSeasons = async () => {
+        setLoading(true)
         await fetch(`/seasons/${info.id}`).then(response => response.json()).then(json => {
             let temp = []
             for (let i = 1; i <= json.count; i++) temp.push(i)
             setSeasonsCount(temp)
+            setLoading(false)
         })
     }
     const HandleSubmit = () => {
@@ -136,7 +138,7 @@ const New = () => {
                             onClick={getSeasons}
                         >
                             <i class="fa fa-exchange" aria-hidden="true"></i>&nbsp;&nbsp;
-                            {'Get Seasons'}
+                            {isLoading ? 'Getting...' : 'Get Seasons'}
                         </button>) : ''
                     }
 

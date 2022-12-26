@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 
 const Edit = () => {
     const location = useLocation();
-    const [type, setType] = useState('movie')
+    const [type, setType] = useState('movies')
     const [isLoading, setLoading] = useState(false);
     const movie = location.state;
     const [seasons, setSeasons] = useState(movie.seasons)
@@ -78,7 +78,7 @@ const Edit = () => {
                             <option value="720p">720</option>
                         </Form.Select>
                     </>
-                    {type == 'movie' ? (
+                    {type == 'movies' ? (
                         <>
                             <div className="mb-3">
                                 <label className="form-label" for="image">Size</label>

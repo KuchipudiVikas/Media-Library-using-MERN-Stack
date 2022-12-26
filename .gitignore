@@ -1,1 +1,6 @@
 node_modules/
+/tester.js
+tester.js
+.env
+/.env
+gmails.txt
