@@ -3,18 +3,15 @@ import { useState, useEffect, useContext } from 'react';
 import { moviesContext } from "../../context/moviesContext";
 
 const Home = () => {
-    const [movies, setMovies] = useState([{}]);
-    const { moviesList, setMoviesList } = useContext(moviesContext)
-    console.log(movies)
-
+    const { moviesList, setMoviesList, setSeriesList } = useContext(moviesContext)
     useEffect(() => {
         fetch('/movies').then(
             response => response.json()
         ).then(data => {
-            setMovies(data);
-            setMoviesList(data);
-
+            setMoviesList(data)
         })
+
+        fetch('/series').then(response => response.json()).then(data => setSeriesList(data))
     }, []);
 
     return (

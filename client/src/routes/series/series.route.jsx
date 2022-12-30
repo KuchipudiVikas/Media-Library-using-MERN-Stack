@@ -1,20 +1,20 @@
-import axios from "axios"
-import { useState } from "react"
-import { useEffect } from "react"
+import { useContext, useEffect } from "react"
 import Movielist from "../../components/movies/movies.components"
+import { moviesContext } from "../../context/moviesContext"
 
 const SeriesPage = () => {
-    const [shows, setShows] = useState([{}])
+    const { seriesList, setSeriesList } = useContext(moviesContext)
     useEffect(() => {
-        fetch('/series').then(
-            response => response.json()
-        ).then(data => {
-            setShows(data);
-
-        })
+        if (!seriesList.length) {
+            fetch('/series').then(
+                response => response.json()
+            ).then(data => {
+                setSeriesList(data);
+            })
+        }
     }, []);
     return (
-        <Movielist movies={shows} />
+        <Movielist movies={seriesList} />
     )
 }
 
