@@ -1,11 +1,11 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useState } from "react";
 
 export const moviesContext = createContext({});
 
 export const MoviesProvider = ({ children }) => {
 
-    const [moviesList, setMoviesList] = useState([{}]);
-    const [seriesList, setSeriesList] = useState([{}])
+    const [moviesList, setMoviesList] = useState([]);
+    const [seriesList, setSeriesList] = useState([])
     const value = {
         moviesList,
         setMoviesList,

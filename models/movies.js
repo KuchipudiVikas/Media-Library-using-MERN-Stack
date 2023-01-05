@@ -15,5 +15,6 @@ const moviesSchema = new Schema({
     runtime: String,
     description: String,
     keyWords: String,
+    index: String
 });
 module.exports = mongoose.model('movies', moviesSchema);

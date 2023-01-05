@@ -13,6 +13,10 @@ code {
 }
 
 body {
-  background-color: white;
+  background-color: rgb(255, 255, 255);
   height: 100%;
+}
+
+.App {
+  margin: 100;
 }

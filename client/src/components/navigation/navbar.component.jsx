@@ -1,6 +1,6 @@
 import { Outlet, Link } from "react-router-dom";
 import navCategories from "./navcategories"
-
+import Footer from "../footer/footer.component";
 
 
 
@@ -32,6 +32,7 @@ const NavBar = () => {
                 </div>
             </nav>
             <Outlet />
+            {/* <Footer /> */}
         </div>
 
 

@@ -6,11 +6,9 @@ const Search = () => {
     const [query, setQuery] = useState('');
     const handleChange = e => {
         setQuery(e.target.value);
-        console.log(moviesList)
     }
     const { moviesList } = useContext(moviesContext);
 
-    console.log(moviesList)
 
     const filteredMovies = moviesList.filter(movie => {
         return movie.title.toLowerCase().includes(query.toLowerCase())

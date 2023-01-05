@@ -1,8 +1,9 @@
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'
-import { useRef, useState } from 'react'
-import { Form, Button } from 'react-bootstrap'
+import { useEffect, useState } from 'react'
+import { Form, } from 'react-bootstrap'
 import './new.styles.css'
+import { Helmet } from 'react-helmet';
 
 const New = () => {
     const navigate = useNavigate();
@@ -11,6 +12,7 @@ const New = () => {
     const [info, setInfo] = useState({})
     const [type, setType] = useState('movies')
     const [seasonsCount, setSeasonsCount] = useState([])
+    const URL = window.location.origin;
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -24,7 +26,7 @@ const New = () => {
         }
         let temp = [...seasons]
         for (let i = 0; i < temp.length; i++) {
-            if (temp[i].name == name) {
+            if (temp[i].name === name) {
                 temp[i].link = value
                 setSeasons(temp)
                 return
@@ -48,21 +50,22 @@ const New = () => {
         setLoading(true)
         axios.post(`/${type}`, { ...info, seasons: seasons }).then(
             response => {
-                const state = { ...response.data, type }
                 navigate(`/${type}/${response.data.title}`, { state: response.data })
             }
         )
     }
 
 
-
-
     return (
 
         <div className="">
+            <Helmet>
+                <title>New</title>
+                <link rel="icon" type="image/png" href={`${URL}/icons/add.png`} sizes="20x16" />
+            </Helmet>
             <div className="row">
                 <h1 className="text-center mt-10">
-                    New {type == 'movies' ? 'Movie' : 'Show'}
+                    New {type === 'movies' ? 'Movie' : 'Show'}
                 </h1>
                 <div className="col-6 offset-3">
                     <div className="mb-3">
@@ -76,10 +79,10 @@ const New = () => {
                     <div className="mb-3">
                         <label className="form-label" htmlFor="id">IMDB ID</label>
                         <input className="form-control" type="text" id="title" name="id" onChange={handleChange} required />
-                        <div className="valid-feedback">
-                            Looks good!
-                        </div>
-
+                    </div>
+                    <div className="mb-3">
+                        <label className="form-label" htmlFor="id">Index</label>
+                        <input className="form-control" type="text" id="title" name="index" onChange={handleChange} required />
                     </div>
 
                     <>
@@ -94,21 +97,15 @@ const New = () => {
                     </>
 
 
-                    {type == 'movies' ? (
+                    {type === 'movies' ? (
                         <>
                             <div className="mb-3">
                                 <label className="form-label" for="image">size</label>
                                 <input className="form-control" type="text" id="image" name="link" onChange={handleChange} required />
-                                <div className="valid-feedback">
-                                    Looks good!
-                                </div>
                             </div>
                             <div className="mb-3">
                                 <label className="form-label" for="image">Link</label>
                                 <input className="form-control" type="text" id="image" name="link" onChange={handleChange} required />
-                                <div className="valid-feedback">
-                                    Looks good!
-                                </div>
                             </div>
                         </>) : ''
                     }
@@ -122,7 +119,7 @@ const New = () => {
                             )
                         })
                     }
-                    {type == 'movies' || seasonsCount.length != 0 ?
+                    {type === 'movies' || seasonsCount.length !== 0 ?
                         (<button
                             className='btn btn-success newBtn'
                             onClick={HandleSubmit}
@@ -131,11 +128,9 @@ const New = () => {
                             {isLoading ? 'Adding…' : 'Add'}
                         </button>) : ''
                     }
-                    {type == 'series' && seasonsCount.length == 0 ? (
+                    {type === 'series' && seasonsCount.length === 0 ? (
 
-                        <button
-                            className='btn btn-primary newBtn'
-                            onClick={getSeasons}
+                        <button className='btn btn-primary newBtn' onClick={getSeasons}
                         >
                             <i class="fa fa-exchange" aria-hidden="true"></i>&nbsp;&nbsp;
                             {isLoading ? 'Getting...' : 'Get Seasons'}

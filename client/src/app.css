@@ -2,3 +2,8 @@
     width: 15%;
     margin: calc(10%/17);
 }
+
+.MovieCards {
+    margin: auto;
+    padding: 10px;
+}

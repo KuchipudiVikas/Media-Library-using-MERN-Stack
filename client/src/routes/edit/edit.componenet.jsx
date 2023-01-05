@@ -1,8 +1,8 @@
+import { Helmet } from 'react-helmet';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Form } from 'react-bootstrap'
-import { useEffect } from 'react';
 
 const Edit = () => {
     const location = useLocation();
@@ -12,6 +12,7 @@ const Edit = () => {
     const [seasons, setSeasons] = useState(movie.seasons)
     const navigate = useNavigate()
     const [movieinfo, setMovieinfo] = useState(movie);
+    const URL = window.location.origin
     useEffect(() => {
         if (movie.seasons) {
             setType('series')
@@ -20,11 +21,9 @@ const Edit = () => {
 
     const handleSeasons = (e) => {
         let { name, value } = e.target;
-        console.log(name, value)
         let temp = [...seasons]
         for (let i = 0; i < temp.length; i++) {
             if (temp[i].name == name) {
-                console.log(name, temp[i].name)
                 temp[i].link = value
                 setSeasons(temp)
             }
@@ -52,6 +51,10 @@ const Edit = () => {
     }
     return (
         <div className="">
+            <Helmet>
+                <title>Edit - {movie.title}</title>
+                <link rel="icon" type="image/png" href={`${URL}/icons/edit.png`} sizes="20x16" />
+            </Helmet>
 
             <div className="row">
                 <h1 className="text-center">

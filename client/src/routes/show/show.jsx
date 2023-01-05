@@ -1,16 +1,17 @@
 import axios from 'axios'
-import { useEffect } from 'react'
-import { useState } from 'react'
-import { Col, Nav, Row, Tab, Form } from 'react-bootstrap'
+import { useState, useEffect } from 'react'
+import { Form } from 'react-bootstrap'
 import { useLocation, useNavigate, Link } from 'react-router-dom'
 import './show.scss'
 import './show.styles.css'
+import Helmet from 'react-helmet'
+
 const Show = () => {
     const navigate = useNavigate()
     const location = useLocation();
     const [type, setType] = useState('movies')
     const movie = location.state;
-    const { title, description, link, backdrop, rating, res, year, poster, seasons } = movie;
+    let { title, description, link, backdrop, rating, res, year, poster, seasons, index } = movie;
     const [folder, setFolder] = useState('')
     useEffect(() => {
         if (seasons) {
@@ -34,7 +35,13 @@ const Show = () => {
         )
     }
     return (
+
         <div style={{ backgroundImage: `url(${backdrop})` }} className="showContainer">
+            <Helmet>
+                <title>{title}</title>
+                <meta name={title} content={title} />
+                <link rel="icon" type="image/png" href={poster} sizes="20x16" />
+            </Helmet>
             <div className="tcard">
                 <div className="tcard_left">
                     <img src={poster} />
@@ -46,6 +53,9 @@ const Show = () => {
                             <li>{year}</li>
                             <li>{res}</li>
                             <li>{rating}</li>
+                            {
+                                index ? <li>{index}</li> : ''
+                            }
                         </ul>
                         <div className="tcard_right__rating">
                             <div className="tcard_right__rating__stars">
@@ -89,6 +99,7 @@ const Show = () => {
                 </div>
             </div>
         </div >
+
 
 
 
