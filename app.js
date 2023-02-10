@@ -58,6 +58,6 @@ if (environment == 'production') {
 
 connectDB().then(() => {
     app.listen(port, () => {
-        console.log("listening for requests ");
+        console.log("listening for requests on port ", port);
     })
 })

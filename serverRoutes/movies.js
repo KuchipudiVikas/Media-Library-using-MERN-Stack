@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const Movie = require('../models/movies');
 const { toRuntime, options, } = require('../helpers/functions')
-
+const fetch = require('node-fetch')
 
 
 router.get('/', async (req, res) => {
@@ -24,7 +24,7 @@ router.post('/', async (req, ress) => {
         .catch(err => console.error('error:' + err));
 
     let { title, year, description, backdrop, trailer, runtime, poster } = movie;
-
+    console.log(movie)
     const rating = movie['ratings'][0]['value']
     runtime = toRuntime(runtime)
     const d = new Movie({ title, res, size, year, poster, backdrop, link, trailer, rating, runtime, description, index })
